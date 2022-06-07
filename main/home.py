@@ -12,4 +12,4 @@ elif choice == "Login":
 	from login import loginForm
 
 elif choice == "Register":
-	from register import registerForm
+	from register import *
