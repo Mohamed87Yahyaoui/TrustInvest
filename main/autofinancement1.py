@@ -33,10 +33,10 @@ with st.form(key="autofinancement1"):
       caList = []
       cafList = []
       bfrList = []
-      cafList.append("RAS")
+      cafList.append(0)
       cafList.append(caf)
       caList.append(float(ca))
-      for i in range(nbannee - 1):
+      for i in range(1,nbannee):
          ca = float(ca) + float(ca) * (float(vac) / 100)
          caList.append(ca)
          cvauto = (float(cv) / 100) * float(ca)
@@ -54,6 +54,10 @@ with st.form(key="autofinancement1"):
 
       Rbfr=Sbfr*float(rbfr)
       print(Rbfr)
+      RbfrList=[]
+      RbfrList = [0 for i in range(nbannee)]
+      RbfrList.append(Rbfr)
+
 
       #Variation du besoin de fond de roulement
 
@@ -61,10 +65,55 @@ with st.form(key="autofinancement1"):
       Vbfr.append(bfrList[0])
       for i in range(1,nbannee):
          Vbfr.append(bfrList[i]-bfrList[i-1])
-
+      Vbfr.append(0)
       print(Vbfr)
 
+      #Valeur résiduelle
+      ValResList=[]
+      ValResList=[0 for i in range(nbannee)]
+      ValResList.append(float(vr))
+
+      #Total 1
+      Total1=[]
+      Total1=[float(cafList[i])+float(RbfrList[i])+float(ValResList[i]) for i in range(nbannee+1)]
+
+      #Investissement
+      InvestList=[]
+      InvestList.append(float(inv))
+      for i in range(1, nbannee+1):
+         InvestList.append(0)
+
+      #Total2
+      Total2=[float(inv)-Vbfr[i] for i in range(nbannee)]
+      Total2.append(0)
+
+      FNT=[Total2[i]-Total1[i] for i in range(nbannee+1)]
+
+      print(len(cafList))
+      print(len(RbfrList))
+      print(len(ValResList))
+      print(len(Total1))
+      print(len(InvestList))
+      print(len(Vbfr))
+      print(len(Total2))
+      print(len(FNT))
+
+
+      Resultat=[cafList,RbfrList,ValResList,Total1,InvestList,Vbfr,Total2,FNT]
+      print(Resultat)
+      df = pd.DataFrame(Resultat,index=["cafList", "RbfrList", "ValResList", "Total1", "InvestList", "Vbfr", "Total2", "FNT"])
+      st.dataframe(df)
+
       #van
+      Van=0
+      for i in range(nbannee+1):
+         Van=Van+(FNT[i]/pow(0.1+1,float(nbannee)))
+      Van=Van-FNT[0]
+      st.write(('Van ' + str(Van)))
+
+      #IP
+      Ip=(1+Van)/FNT[0]
+      st.write(('Ip ' + str(Ip)))
 
 
 
