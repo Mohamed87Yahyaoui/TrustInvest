@@ -20,23 +20,23 @@ def app():
         submissionButton = st.form_submit_button(label="Valider")
         if submissionButton==True:
 
-           nbannee=5
-           an = (float(montantEmprunt) * (float(tauxInteret)) / (1 - (pow(1 + float(tauxInteret), -nbannee)))
+            nbannee=5
+            an = (float(montantEmprunt) * (float(tauxInteret)) / (1 - (pow(1 + float(tauxInteret), -nbannee)))
 
 
-           Cdp=[]
-           Cdp.append(float(montantEmprunt))
-           interet=[]
-           interet.append(float(montantEmprunt)*(float(tauxInteret)/100) )
-           anList=[an for i in range(nbannee)]
+            Cdp=[]
+            Cdp.append(float(montantEmprunt))
+            interet=[]
+            interet.append(float(montantEmprunt)*(float(tauxInteret)/100) )
+            anList=[an for i in range(nbannee)]
 
-           amortis=[]
-           amortis.append(an- interet[0])
-           for i in range(1,nbannee):
+            amortis=[]
+            amortis.append(an- interet[0])
+            for i in range(1,nbannee):
 
-              Cdp.append(Cdp[i-1]-amortis[i-1])
-              interet.append(Cdp[i]*(float(tauxInteret)/100))
-               amortis.append(an-interet[i])
+                Cdp.append(Cdp[i-1]-amortis[i-1])
+                interet.append(Cdp[i]*(float(tauxInteret)/100))
+                amortis.append(an-interet[i])
 
             Resultat=[Cdp,interet,anList,amortis]
             df = pd.DataFrame(Resultat,
