@@ -86,8 +86,7 @@ def app():
             InvestList.append(0)
 
          #Total2
-         Total2=[float(inv)-Vbfr[i] for i in range(nbannee)]
-         Total2.append(0)
+         Total2=[float(inv)-Vbfr[i] for i in range(nbannee+1)]
 
          FNT=[Total2[i]-Total1[i] for i in range(nbannee+1)]
 
