@@ -18,29 +18,25 @@ def app():
         tauxInteret = st.text_input("Taux d'interet en %:")
 
         submissionButton = st.form_submit_button(label="Valider")
-        if submissionButton==True:
-
+        if submissionButton == True:
             nbannee=5
-            an = (float(montantEmprunt) * (float(tauxInteret)) / (1 - (pow(1 + float(tauxInteret), -nbannee)))
 
-
+            an=(float(montantEmprunt) * (float(tauxInteret)/100)) / (1 - (pow(1+(float(tauxInteret)/100), -nbannee)))
             Cdp=[]
             Cdp.append(float(montantEmprunt))
             interet=[]
-            interet.append(float(montantEmprunt)*(float(tauxInteret)/100) )
+            interet.append(float(montantEmprunt)*(float(tauxInteret)/100))
             anList=[an for i in range(nbannee)]
 
             amortis=[]
-            amortis.append(an- interet[0])
+            amortis.append(an-interet[0])
             for i in range(1,nbannee):
-
                 Cdp.append(Cdp[i-1]-amortis[i-1])
                 interet.append(Cdp[i]*(float(tauxInteret)/100))
                 amortis.append(an-interet[i])
 
             Resultat=[Cdp,interet,anList,amortis]
-            df = pd.DataFrame(Resultat,
-                              index=["Cdp","Interet","Annuité","Ammortissement"])
+            df = pd.DataFrame(Resultat, index=["Cdp","Interet","Annuité","Ammortissement"])
             st.dataframe(df)
 
             cvauto = (float(cv) / 100) * float(ca)
@@ -49,7 +45,7 @@ def app():
             rnet = rbrute - (0.3 * rbrute)
             caf = rnet + amorti
 
-            chargeInteret = [interetList[i] * (float(tauxInteret) / 100) for i in range(nbannee)]
+            chargeInteret = [interet[i] * (float(tauxInteret) / 100) for i in range(nbannee)]
 
             st.write('cvauto : ' + str(cvauto))
             st.write('amorti : ' + str(amorti))
@@ -71,19 +67,19 @@ def app():
             caList.append(float(ca))
             for i in range(1, nbannee):
                 ca = float(ca) + float(ca) * (float(vac) / 100)
-            caList.append(ca)
-            cvauto = (float(cv) / 100) * float(ca)
-            rbrute = float(ca) - cvauto - float(cf) - amorti - chargeInteret[i]
-            rnet = rbrute - (0.3 * rbrute)
-            caf = rnet + amorti
-            cafList.append(caf)
+                caList.append(ca)
+                cvauto = (float(cv) / 100) * float(ca)
+                rbrute = float(ca) - cvauto - float(cf) - amorti - chargeInteret[i]
+                rnet = rbrute - (0.3 * rbrute)
+                caf = rnet + amorti
+                cafList.append(caf)
             print(cafList)
 
             # Reccup bfr
             Sbfr = 0
             for i in range(nbannee):
                 bfrList.append((float(bfr) / 100) * caList[i])
-            Sbfr = bfrList[i] + Sbfr
+                Sbfr = bfrList[i] + Sbfr
 
             Rbfr = Sbfr * float(rbfr)
             print(Rbfr)
@@ -116,6 +112,7 @@ def app():
             for i in range(1, nbannee + 1):
                 InvestList.append(0)
 
+            m = float(montantEmprunt) / nbannee
             MList = []
             MList.append(0)
             for i in range(1, nbannee + 1):
@@ -146,6 +143,8 @@ def app():
             # IP
             Ip = (1 + Van) / FNT[0]
             st.write(('Ip ' + str(Ip)))
+
+
 
 
 
