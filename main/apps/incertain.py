@@ -60,4 +60,4 @@ def app():
           regretAuto=max(ListAutoSavage)
           regretAmort=max(ListAmorSavage)
           regretAnn=max(ListAnnSavage)
-          min(regretAuto,regretAmort,regretAnn)
+          min(regretAuto, regretAmort, regretAnn)
