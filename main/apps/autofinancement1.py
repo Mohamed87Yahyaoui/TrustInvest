@@ -24,11 +24,11 @@ def app():
          rnet = rbrute - (0.3 * rbrute)
          caf = rnet + amorti
 
-         st.write('cvauto ' + str(cvauto))
-         st.write('amorti ' + str(amorti))
-         st.write('rbrute ' + str(rbrute))
-         st.write('rnet ' + str(rnet))
-         st.write('caf ' + str(caf))
+         st.write('Charges variables ' + str(cvauto))
+         st.write('Ammortissement ' + str(amorti))
+         st.write('Résultat brute ' + str(rbrute))
+         st.write('Résultat net ' + str(rnet))
+         st.write('La CAF ' + str(caf))
 
          nbannee = 5
 
@@ -93,7 +93,7 @@ def app():
 
          Resultat=[cafList,RbfrList,ValResList,Total1,InvestList,Vbfr,Total2,FNT]
          print(Resultat)
-         df = pd.DataFrame(Resultat,index=["cafList", "RbfrList", "ValResList", "Total1", "InvestList", "Vbfr", "Total2", "FNT"])
+         df = pd.DataFrame(Resultat,index=["CAF", "Reccupération BFR", "Valeur résiduelle", "Total1", "Investissement", "Variation BFR", "Total2", "FNT"])
          st.dataframe(df)
 
       #van
@@ -101,11 +101,22 @@ def app():
          for i in range(nbannee+1):
             Van=Van+(FNT[i]/pow(0.1+1,float(nbannee)))
          Van=Van-FNT[0]
-         st.write(('Van ' + str(Van)))
+         st.write(('La VAN ' + str(Van)))
+         if Van>0:
+            st.write('Selon le critère de la VAN, le projet est rentable')
+         elif Van<0:
+            st.write("Selon le critère de la VAN, le projet n'est pas rentable")
 
       #IP
          Ip=(1+Van)/FNT[0]
-         st.write(('Ip ' + str(Ip)))
+         st.write(("L'IP " + str(Ip)))
+         if Ip>1:
+            st.write("Selon le critère de l'IP le projet est rentable")
+         elif Ip<1:
+            st.write("Selon le critère de l'IP, le projet n'est pas rentable")
+
+
+
 
 
 

@@ -128,8 +128,8 @@ def app():
             Resultat = [cafList, RbfrList, ValResList, montantEmpruntList, Total1, InvestList, Vbfr, MList, Total2, FNT]
             print(Resultat)
             df = pd.DataFrame(Resultat,
-                              index=["cafList", "RbfrList", "ValResList", "Montant d'empr", "Total1", "InvestList",
-                                     "Vbfr", "rembourssement d'emp", "Total2",
+                              index=["La CAF", "Rembourssement BFR", "Valeur résiduelle", "Montant d'emprunt", "Total1", "Investissement",
+                                     "Variation BFR", "Rembourssement d'emprunt", "Total2",
                                      "FNT"])
             st.dataframe(df)
 
@@ -139,10 +139,19 @@ def app():
                 Van = Van + (FNT[i] / pow(0.1 + 1, float(nbannee)))
             Van = Van - FNT[0]
             st.write(('Van ' + str(Van)))
+            if Van > 0:
+                st.write('Selon le critère de la VAN, le projet est rentable')
+            elif Van < 0:
+                st.write("Selon le critère de la VAN, le projet n'est pas rentable")
+
 
             # IP
             Ip = (1 + Van) / FNT[0]
             st.write(('Ip ' + str(Ip)))
+            if Ip > 1:
+                st.write("Selon le critère de l'IP le projet est rentable")
+            elif Ip < 1:
+                st.write("Selon le critère de l'IP, le projet n'est pas rentable")
 
 
 
