@@ -120,7 +120,7 @@ def app():
             print("MLIST : " + str(MList))
 
             # Total2
-            Total2 = [float(inv) - Vbfr[i] - m for i in range(nbannee + 1)]
+            Total2 = [InvestList[i] - Vbfr[i] - m for i in range(nbannee + 1)]
             print("TOTAl2 : " + str(Total2))
 
             FNT = [Total2[i] - Total1[i] for i in range(nbannee + 1)]
