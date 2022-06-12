@@ -47,12 +47,12 @@ def app():
 
             chargeInteret = [interet[i] * (float(tauxInteret) / 100) for i in range(nbannee)]
 
-            st.write('cvauto : ' + str(cvauto))
-            st.write('amorti : ' + str(amorti))
-            st.write('rbrute : ' + str(rbrute))
-            st.write('rnet : ' + str(rnet))
-            st.write('caf : ' + str(caf))
-            st.write("charges d'interet : " + str(chargeInteret[0]))
+            st.write('Charges variables : ' + str(cvauto))
+            st.write('Ammortissement : ' + str(amorti))
+            st.write('Résultat brute : ' + str(rbrute))
+            st.write('Résultat net : ' + str(rnet))
+            st.write('La CAF : ' + str(caf))
+            st.write("Les charges d'interets : " + str(chargeInteret[0]))
 
             montantEmpruntList = []
             montantEmpruntList.append(float(montantEmprunt))
@@ -128,8 +128,8 @@ def app():
             Resultat = [cafList, RbfrList, ValResList, montantEmpruntList, Total1, InvestList, Vbfr, MList, Total2, FNT]
             print(Resultat)
             df = pd.DataFrame(Resultat,
-                              index=["La CAF", "Rembourssement BFR", "Valeur résiduelle", "Montant d'emprunt", "Total1", "Investissement",
-                                     "Variation BFR", "Rembourssement d'emprunt", "Total2",
+                              index=["La CAF", "Rembourssement BFR", "Valeur résiduelle", "Montant d'emprunt", "Total 1", "Investissement",
+                                     "Variation BFR", "Rembourssement d'emprunt", "Total 2",
                                      "FNT"])
             st.dataframe(df)
 
